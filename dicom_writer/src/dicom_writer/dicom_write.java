@@ -1,6 +1,8 @@
 import java.io.*;
 import java.io.ByteArrayOutputStream;
-package dicom_writer;
+
+
+//package dicom_writer;
 
 public class dicom_write {
 	String nom_fichier;
@@ -11,7 +13,8 @@ public class dicom_write {
 		
 	}
 	public void set_data_VRstrict(int tag, String VR, int longueur, int value) {
-		/*Nombre est le TAG */
+		/*Nombre est le TAG
+		 * Utilisation du code Endian Data Input Stream modifié.... */
 		
 		
 		
