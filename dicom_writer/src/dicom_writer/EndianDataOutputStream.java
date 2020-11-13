@@ -1,15 +1,17 @@
 package dicom_writer;
 
-public class EndianDataOutputStream extends Outputstream {
 
-import java.io.DataInput;
+
+import java.io.OutputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-/**
+public class EndianDataOutputStream extends OutputStream {
+/*
+ * 
  * Simple class to add endian support to DataInputStream.
  * User: michael
  * Date: 9/12/13
@@ -24,7 +26,7 @@ import java.nio.ByteOrder;
         dataIn = new DataInputStream( stream );
     }
 */
-    public EndianDataInputStream order(ByteOrder o){
+    public EndianDataOutputStream order(ByteOrder o){
         order = o;
         return this;
     }
