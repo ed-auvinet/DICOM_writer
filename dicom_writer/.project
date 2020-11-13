@@ -14,4 +14,17 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>EndianDataInputStream.java</name>
+			<type>1</type>
+			<locationURI>copy_PARENT/EndianDataInputStream.java</locationURI>
+		</link>
+	</linkedResources>
+	<variableList>
+		<variable>
+			<name>copy_PARENT</name>
+			<value>$%7BPARENT-3-PROJECT_LOC%7D</value>
+		</variable>
+	</variableList>
 </projectDescription>
