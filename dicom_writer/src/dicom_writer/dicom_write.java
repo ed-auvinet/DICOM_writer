@@ -11,8 +11,11 @@ public class dicom_write {
 		this.nom_fichier=nom;
 		
 	}
-	public void set_data(int nombre, String VR, int longueur, int value) {
+	public void set_data_VRstrict(int nombre, String VR, int longueur, int value) {
 		/*nombre reprend le tag*/
+		
+	}
+	public void	set_data_VR(int nombre, String VR, int longueur, int value) {
 		
 	}
 	/*public void open (String NomDuFichier) {
