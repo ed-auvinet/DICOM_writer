@@ -1,6 +1,5 @@
 import java.io.*;
 import java.io.ByteArrayOutputStream;
-
 package dicom_writer;
 
 public class dicom_write {
@@ -14,8 +13,15 @@ public class dicom_write {
 	public void set_data_VRstrict(int tag, String VR, int longueur, int value) {
 		/*Nombre est le TAG */
 		
+		
+		
+		
 	}
 	public void	set_data_VR(int nombre, String VR, int longueur, int value) {
+	
+		
+		
+		
 		
 	}
 	/*public void open (String NomDuFichier) {
