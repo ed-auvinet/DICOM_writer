@@ -19,7 +19,7 @@ public class dicom_write {
 		
 	}
 	/*public void open (String NomDuFichier) {
-		
+		Salut des soucisses
 	}*/
 	
 
