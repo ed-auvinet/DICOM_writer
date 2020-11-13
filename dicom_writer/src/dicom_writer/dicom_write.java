@@ -12,7 +12,7 @@ public class dicom_write {
 		
 	}
 	public void set_data_VRstrict(int nombre, String VR, int longueur, int value) {
-		/*nombre reprend le tag*/
+		/*J'ai bien mangé*/
 		
 	}
 	public void	set_data_VR(int nombre, String VR, int longueur, int value) {
