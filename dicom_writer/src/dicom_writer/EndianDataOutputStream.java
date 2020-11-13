@@ -2,14 +2,16 @@ package dicom_writer;
 
 
 
-import java.io.OutputStream;
-import java.io.DataInputStream;
+import java.io.DataOutput;
+import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-public class EndianDataOutputStream extends OutputStream {
+
+public class EndianDataOutputStream extends OutputStream implements DataOutput {
+	
 /*
  * 
  * Simple class to add endian support to DataInputStream.
