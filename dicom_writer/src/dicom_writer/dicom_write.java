@@ -1,3 +1,6 @@
+import java.io.*;
+import java.io.ByteArrayOutputStream;
+
 package dicom_writer;
 
 public class dicom_write {
@@ -8,10 +11,13 @@ public class dicom_write {
 		this.nom_fichier=nom;
 		
 	}
-	public void open (String NomDuFichier) {
+	public void set_data(int nombre, String VR, int longueur, int value) {
+		/*nombre reprend le tag*/
 		
 	}
-	
+	/*public void open (String NomDuFichier) {
+		
+	}*/
 	
 
 }
