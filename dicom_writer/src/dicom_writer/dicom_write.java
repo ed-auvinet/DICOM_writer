@@ -11,8 +11,8 @@ public class dicom_write {
 		this.nom_fichier=nom;
 		
 	}
-	public void set_data_VRstrict(int nombre, String VR, int longueur, int value) {
-		/*J'ai bien mangé*/
+	public void set_data_VRstrict(int tag, String VR, int longueur, int value) {
+		/*Nombre est le TAG */
 		
 	}
 	public void	set_data_VR(int nombre, String VR, int longueur, int value) {
