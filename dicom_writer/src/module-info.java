@@ -1,2 +1,0 @@
-module dicom_writer {
-}
