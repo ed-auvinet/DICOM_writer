@@ -1,5 +1,6 @@
 package projet_dicom_writer;
 
+import java.io.ByteArrayOutputStream;
 import java.io.DataOutput;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -9,23 +10,27 @@ import java.nio.ByteOrder;
 
 
 public class EndianDataOutputStream extends OutputStream implements DataOutput {
-	
 /*
+ * Simple class to add endian support ton DataOutputStream
+ * User antonin
+ * Date 16.11.2020
+ * 
+ * Inspired By 
  * 
  * Simple class to add endian support to DataInputStream.
  * User: michael
  * Date: 9/12/13
  * Time: 4:39 PM
  */
-/*public class EndianDataInputStream extends InputStream implements DataInput {
-    DataInputStream dataIn;
-    private ByteBuffer buffer = ByteBuffer.allocate(8);
-    ByteOrder order = ByteOrder.BIG_ENDIAN;
-
-    public EndianDataInputStream( InputStream stream ){
-        dataIn = new DataInputStream( stream );
-    }
-*/
+	ByteArrayOutputStream dataout;
+	private ByteBuffer buffer = ByteBuffer.allocate(8);
+	ByteOrder order = ByteOrder.BIG_ENDIAN;
+	
+	public EndianDataOutputStream (int nbroctet) {
+		/*Constructor 
+		 * Initialize the output to a number of Byte different then the defaut 32 bytes */
+	}
+	
     public EndianDataOutputStream order(ByteOrder o){
         order = o;
         return this;
@@ -150,6 +155,78 @@ public class EndianDataOutputStream extends OutputStream implements DataOutput {
     public int readUnsignedShort() throws IOException {
         return (int)readShort();
     }
+
+@Override
+public void writeBoolean(boolean arg0) throws IOException {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void writeByte(int arg0) throws IOException {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void writeBytes(String arg0) throws IOException {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void writeChar(int arg0) throws IOException {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void writeChars(String arg0) throws IOException {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void writeDouble(double arg0) throws IOException {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void writeFloat(float arg0) throws IOException {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void writeInt(int arg0) throws IOException {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void writeLong(long arg0) throws IOException {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void writeShort(int arg0) throws IOException {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void writeUTF(String arg0) throws IOException {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void write(int arg0) throws IOException {
+	// TODO Auto-generated method stub
+	
+}
 }
 
 }
