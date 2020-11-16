@@ -14,6 +14,7 @@ public class EndianDataOutputStream extends OutputStream implements DataOutput {
  * Simple class to add endian support ton DataOutputStream
  * User antonin
  * Date 16.11.2020
+ * EST A UTILISER PLUS TARD, finir le reste du code comme si l'on codait en BIG ENDIAN
  * 
  * Inspired By 
  * 
@@ -29,6 +30,7 @@ public class EndianDataOutputStream extends OutputStream implements DataOutput {
 	public EndianDataOutputStream (int nbroctet) {
 		/*Constructor 
 		 * Initialize the output to a number of Byte different then the defaut 32 bytes */
+		//this.order=;
 	}
 	
     public EndianDataOutputStream order(ByteOrder o){
