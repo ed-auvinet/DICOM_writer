@@ -71,14 +71,17 @@ public class Dicom_write {
 			
 		}
 		
-		private int[] translate(){
-			/*Transforme une ArrayList en int[]*/
+		private byte[] translate(){
+			/*Transforme une ArrayList en int[]
+			 * MODIFICATION transforme ArrayList<Integer> to byte[] !*/
 			int ite;
 			int MaxL=list_tempo.size();
-			int[] list_tempo_int=new int[MaxL];
+			byte[] list_tempo_byte=new byte[MaxL];
 			for (ite =0; ite<MaxL;ite++) {
-				list_tempo_int[ite] =list_tempo.get(ite);
+				int temp=list_tempo.get(ite); // Si  problème, remplacer en Integer
+				list_tempo_byte[ite] =(byte) temp; //byteValue si Integer
 				}
+			return list_tempo_byte;
 				
 			}
 			
@@ -87,9 +90,9 @@ public class Dicom_write {
 			
 		}
 		public ByteArrayOutputStream export() {
-			byte[] table_tempo=toArray(list_tempo);
+			byte[] list_tempo_byte=translate();
 			ByteArrayOutputStream Sortie = new ByteArrayOutputStream(table_tempo.length);
-			Sortie.write(table_tempo);
+			Sortie.write(list_tempo_byte);
 			return Sortie;
 		}
 		
