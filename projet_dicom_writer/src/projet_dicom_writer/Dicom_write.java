@@ -17,7 +17,7 @@ public class Dicom_write {
 		/*Prepare le dicom avec le preambule et la norme*/
 		int i;
 		for (i=0; i==4;i++) { 
-				byte elem=(int) 0; // ajout 32 octet de 0 4x =128 octets 
+				byte elem=(int) 0; // ajout 32 octet de 0,  4x =128 octets 
 				list_tempo.add(elem);
 		}
 		list_tempo.add((byte) 'D'); //0x44);  quelle taille fait 0x..
@@ -26,13 +26,17 @@ public class Dicom_write {
 		list_tempo.add((byte) 'M'); //0x4D);
 		
 	}
+
+	
 	
 	public void addTag(char tag) {
 		//en endian, à ajouter 
+		/*Ajoute une lettre en 16bit */
 		list_tempo.add((byte) tag);
 		
 	}
 	public void addVRstrict(char VR) {
+		/*Ajoute une lettre en 16bit */
 		//en endian, à ajouter 
 		list_tempo.add((byte) VR);
 		
@@ -44,6 +48,7 @@ public class Dicom_write {
 	}
 	public void addValueLengStrict(int longueur) {
 		//int unsigned remplacé par int tant qu'on dépasse pas les 2 millions
+		// ajoute un nombre complet
 		//en endian, à ajouter 
 		list_tempo.add((byte) longueur);
 		
@@ -59,10 +64,8 @@ public class Dicom_write {
 		
 	}
 	
-	public void set_nom_fichier(String nom) {
-			this.nom_fichier=nom;
 			
-		}
+		
 		public void set_data_VRstrict(String tag, String VR, int longueur, int[] value) {
 			/*Nombre est le TAG
 			 * Utilisation du code Endian Data Input Stream modifié.... à ajouter ici à chaque étapes */
