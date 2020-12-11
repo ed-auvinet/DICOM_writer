@@ -25,6 +25,10 @@ public class Dicom_write {
 		list_tempo.add((byte) 'C'); //0x43);
 		list_tempo.add((byte) 'M'); //0x4D);
 		
+		//Dicom-Meta-Information-Header
+		this.addTag((char) 2);
+		this.addTag((char) 0);
+		this.addTag(tag);
 	}
 
 	
@@ -36,12 +40,16 @@ public class Dicom_write {
 		
 	}
 	public void addVRstrict(char VR) {
-		/*Ajoute une lettre en 16bit */
+		/*Ajoute la seconde lettre 16bit ainsi que 2byte vide */
 		//en endian, à ajouter 
 		list_tempo.add((byte) VR);
+		list_tempo.add((byte) 0);
+		list_tempo.add((byte) 0);
+		
 		
 	}
 	public void addVR(char VR) {
+		/*Ajoute une lettre en 16bit */
 		//en endian, à ajouter 
 		list_tempo.add((byte) VR);
 		
