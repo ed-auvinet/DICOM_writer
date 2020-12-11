@@ -26,6 +26,7 @@ try (BufferedReader br = new BufferedReader(new FileReader("x.csv"))) {
 
 } catch (IOException e) {
     e.printStackTrace();
+
 }
 return x_values;
 }
