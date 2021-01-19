@@ -85,18 +85,18 @@ public class Dicom_write {
 	}
 	
 		
-	public void set_data_VRstrict(char g1, char g2 , char el1, char el2, char VR1, char VR2, int longueur ) {
+	public void set_data_VRstrict(char g1, char g2, char VR1, char VR2, int longueur ) {
 
-		this.addTag(g1, g2, el1, el2);
+		this.addTag(g1, g2);
 		this.addVRstrict(VR1,VR2);
 		this.addValueLengStrict(longueur);
 
 		
 	}
 	
-	public void set_data_VR(char g1, char g2, char el1, char el2 ,char VR1, char VR2, char longueur) {
+	public void set_data_VR(char g1, char g2, char VR1, char VR2, char longueur) {
 		int i;
-		this.addTag(g1, g2, el1, el2);
+		this.addTag(g1, g2);
 		this.addVR(VR1,VR2);
 		this.addValueLeng(longueur);
 
@@ -107,7 +107,7 @@ public class Dicom_write {
 	/*Ajoutes un data element d'un paquet de données
 	 * 
 	 * */
-		this.addTag ((char) 54,(char) 00,(char) 10,(char) 11);
+		this.addTag ((char) 0x5400,(char) 0x1011);
 		this.addVRstrict('O','B');
 		this.addValueLengStrict(valeur.size());
 		

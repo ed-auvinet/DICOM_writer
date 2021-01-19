@@ -32,22 +32,27 @@ public class Main_write {
 		
 		//Remplissage des Waveforms
 		//Type de données dans les waveforme
-		myFichier.addTag((char) 0x5400,(char) 0x1006);		//5400 1006 CS 0004 SL // 32bit signés
-		myFichier.addVR('C', 'S');
-		myFichier.addValueLeng( (char) 4);
-		myFichier.addVR('S','L'); // ajoute la valeur qui sont des caractères ici.
 		
 		myFichier.addTag((char) 0x003A,(char) 0x0005);		//003A 0005 US 0002 6 // Nombre de channels 6 
 		myFichier.addVR('U', 'S');
 		myFichier.addValueLeng( (char) 2);
 		myFichier.addValueLeng((char) 0x6); // ajoute la valeur qui 16bit non signés
 		
-		myFichier.addTag((char) 0x003A,(char) 0x0010);		//003A 0005 US 0002 6 // Nombre de channels 6 
+		myFichier.addTag((char) 0x003A,(char) 0x0010);				//00 3A 00 10 UL 00 04 4 // Nombre de sample par channels 4
 		myFichier.addVR('U', 'L');
 		myFichier.addValueLeng( (char) 0x0004);
 		myFichier.addValueInt((int) 0x4); // ajoute la valeur en 32bit non signé via un 32 bit signés
 		
-		//00 3A 00 10 UL 00 04 4 // Nombre de sample par channels 4
+		myFichier.addTag((char) 0x5400,(char) 0x1006);		//5400 1006 CS 0004 SL // 32bit signés
+		myFichier.addVR('C', 'S');
+		myFichier.addValueLeng( (char) 4);
+		myFichier.addVR('S','L'); // ajoute la valeur qui sont des caractères ici.
+		
+		// On ajoute mnt les DATA
+		myFichier.addTag((char)5400, (char)1010);
+		myFichier.addVRstrict('O', 'B');
+		myFichier.addValueLengStrict(96); // 6 channels, 4 samples = 24 data de 4 Bytes chacuns => 96 Bytes
+		myFichier.addValueIntlist(records);
 		
 	}
 
