@@ -9,7 +9,7 @@ public class Dicom_write {
 	private String nom_fichier;
 	private ByteArrayOutputStream Sortie;
 	private byte octetvalue;
-	private ArrayList<Byte> list_tempo; //utiliser list<Integer> instead ?
+	private ArrayList<Byte> list_tempo = new ArrayList<Byte>(); //utiliser list<Integer> instead ?
 	//utiliser le ArrayList<byte> à la place pour 
 	//package dicom_writer;
 	
@@ -20,56 +20,103 @@ public class Dicom_write {
 				byte elem=(int) 0; // ajout 32 octet de 0,  4x =128 octets 
 				list_tempo.add(elem);
 		}
-		list_tempo.add((byte) 'D'); //0x44);  quelle taille fait 0x..
+		list_tempo.add((byte) 'D'); //0x44);  
 		list_tempo.add((byte) 'I'); //0x49);
 		list_tempo.add((byte) 'C'); //0x43);
 		list_tempo.add((byte) 'M'); //0x4D);
 		
+		//Dicom-Meta-Information-Header
 	}
 
 	
 	
-	public void addTag(char tag) {
-		//en endian, à ajouter 
-		/*Ajoute une lettre en 16bit */
-		list_tempo.add((byte) tag);
+	public void addTag(char g1, char g2) {
+		/*Ajoutes le tag en 16bits - */
+		// Ajout little endian
+		list_tempo.add((byte)g1);
+		list_tempo.add((byte)g2);
 		
 	}
-	public void addVRstrict(char VR) {
-		/*Ajoute une lettre en 16bit */
-		//en endian, à ajouter 
-		list_tempo.add((byte) VR);
+	public void addVRstrict(char VR1, char VR2) {
+		/*Ajoute les 2 VR ainsi que 2byte vide 
+		 * Finie */
+		list_tempo.add((byte) VR1);
+		list_tempo.add((byte) VR2);
+		list_tempo.add((byte) 0);
+		list_tempo.add((byte) 0);
+		
 		
 	}
-	public void addVR(char VR) {
-		//en endian, à ajouter 
-		list_tempo.add((byte) VR);
+	public void addVR(char VR1, char VR2) {
+		/*Ajoute une lettre en 16bit - 
+		 * Finie */
+		list_tempo.add((byte) VR1);
+		list_tempo.add((byte) VR2);
 		
 	}
 	public void addValueLengStrict(int longueur) {
-		//int unsigned remplacé par int tant qu'on dépasse pas les 2 millions
+		// int unsigned remplacé par int tant qu'on dépasse pas les 2 millions
 		// ajoute un nombre complet
-		//en endian, à ajouter 
+		// fonction little endian ICI ajouter 
 		list_tempo.add((byte) longueur);
 		
 	}
 	public void addValueLeng(char longueur) {
-		//en endian, à ajouter 
+		//ajoute fonction little endian 
 		list_tempo.add((byte) longueur);
+	}
+	
+	public void addValueInt (int Valeur) {
+		//little endian fonction
+		list_tempo.add((byte) Valeur);
 		
 	}
-	public void addValue(int valeur) {
+	public void addValueIntlist(ArrayList<Integer> valeur) {
 		//en endian, à ajouter 
-		list_tempo.add((byte) valeur);
+		int i;
+		for (i=0; i== (int)valeur.size();i++) { 
+			list_tempo.add((byte) valeur.get(i).intValue());
+		}
+	}
+	
+	public void addValueText(String Text) {
+		//en endian, à ajouter 
+
+	}
+	
+		
+	public void set_data_VRstrict(char g1, char g2, char VR1, char VR2, int longueur ) {
+
+		this.addTag(g1, g2);
+		this.addVRstrict(VR1,VR2);
+		this.addValueLengStrict(longueur);
+
 		
 	}
 	
-			
+	public void set_data_VR(char g1, char g2, char VR1, char VR2, char longueur) {
+		int i;
+		this.addTag(g1, g2);
+		this.addVR(VR1,VR2);
+		this.addValueLeng(longueur);
+
+	
+	}
+	
+	public void set_data(ArrayList<Integer> valeur) {
+	/*Ajoutes un data element d'un paquet de données
+	 * 
+	 * */
+		this.addTag ((char) 0x5400,(char) 0x1011);
+		this.addVRstrict('O','B');
+		this.addValueLengStrict(valeur.size());
 		
-		public void set_data_VRstrict(String tag, String VR, int longueur, int[] value) {
+
+	}
+		/* public void set_data_VRstrict(String tag, String VR, int longueur, int[] value) {
 			/*Nombre est le TAG
 			 * Utilisation du code Endian Data Input Stream modifié.... à ajouter ici à chaque étapes */
-			char VR1=VR.charAt(0);
+			/* char VR1=VR.charAt(0);
 			char VR2=VR.charAt(1);
 			// (Quelle taille a ce VR1 ? une ou 2 chiffre ? Comment les ajouter 
 			// regarder lorsqu'il tournera) AH AH Non gardons le comme ça, il sera transformé en binaire 
@@ -77,9 +124,9 @@ public class Dicom_write {
 			for (ite=0; ite<3;ite++) {
 				int elem=tag.charAt(0);
 				list_tempo.add(elem);
-			}
+			} 
 
-		}
+		} */
 		
 		
 		public ByteArrayOutputStream export() throws IOException {
