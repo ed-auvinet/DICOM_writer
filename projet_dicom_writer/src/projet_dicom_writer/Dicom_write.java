@@ -9,7 +9,7 @@ public class Dicom_write {
 	private String nom_fichier;
 	private ByteArrayOutputStream Sortie;
 	private byte octetvalue;
-	private ArrayList<Byte> list_tempo; //utiliser list<Integer> instead ?
+	private ArrayList<Byte> list_tempo = new ArrayList<Byte>(); //utiliser list<Integer> instead ?
 	//utiliser le ArrayList<byte> à la place pour 
 	//package dicom_writer;
 	
@@ -30,19 +30,16 @@ public class Dicom_write {
 
 	
 	
-	public void addTag(char g1, char g2, char el1, char el2) {
-		/*Ajoutes le tag
-		 * Inverse manuellement tous les éléments donc les bytes*/
-		/*Ajoute une lettre en 16bit */
-		list_tempo.add((byte) g2);
-		list_tempo.add((byte) g1);
-		list_tempo.add((byte) el2);
-		list_tempo.add((byte) el1);
-
+	public void addTag(char g1, char g2) {
+		/*Ajoutes le tag en 16bits - */
+		// Ajout little endian
+		list_tempo.add((byte)g1);
+		list_tempo.add((byte)g2);
+		
 	}
 	public void addVRstrict(char VR1, char VR2) {
-		/*Ajoute la seconde lettre 16bit ainsi que 2byte vide */
-		//en endian, à ajouter 
+		/*Ajoute les 2 VR ainsi que 2byte vide 
+		 * Finie */
 		list_tempo.add((byte) VR1);
 		list_tempo.add((byte) VR2);
 		list_tempo.add((byte) 0);
@@ -51,16 +48,15 @@ public class Dicom_write {
 		
 	}
 	public void addVR(char VR1, char VR2) {
-		/*Ajoute une lettre en 16bit */
-		//en endian, à ajouter 
+		/*Ajoute une lettre en 16bit - 
+		 * Finie */
 		list_tempo.add((byte) VR1);
 		list_tempo.add((byte) VR2);
 		
 	}
 	public void addValueLengStrict(int longueur) {
-		//int unsigned remplacé par int tant qu'on dépasse pas les 2 millions
+		// int unsigned remplacé par int tant qu'on dépasse pas les 2 millions
 		// ajoute un nombre complet
-		
 		// fonction little endian ICI ajouter 
 		list_tempo.add((byte) longueur);
 		
@@ -68,23 +64,24 @@ public class Dicom_write {
 	public void addValueLeng(char longueur) {
 		//ajoute fonction little endian 
 		list_tempo.add((byte) longueur);
-		
 	}
 	
-	public void addValueInt(ArrayList<Integer> valeur) {
+	public void addValueInt (int Valeur) {
+		//little endian fonction
+		list_tempo.add((byte) Valeur);
+		
+	}
+	public void addValueIntlist(ArrayList<Integer> valeur) {
 		//en endian, à ajouter 
 		int i;
 		for (i=0; i== (int)valeur.size();i++) { 
 			list_tempo.add((byte) valeur.get(i).intValue());
 		}
-		
+	}
+	
 	public void addValueText(String Text) {
 		//en endian, à ajouter 
-		int i;
-		for (i=0; i== (int)valeur.size();i++) { 
-			list_tempo.add((byte) valeur.get(i).intValue());
-		}
-		
+
 	}
 	
 		
@@ -113,6 +110,7 @@ public class Dicom_write {
 		this.addTag ((char) 54,(char) 00,(char) 10,(char) 11);
 		this.addVRstrict('O','B');
 		this.addValueLengStrict(valeur.size());
+		
 
 	}
 		/* public void set_data_VRstrict(String tag, String VR, int longueur, int[] value) {
