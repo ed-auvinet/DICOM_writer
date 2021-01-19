@@ -1,6 +1,8 @@
 package projet_dicom_writer;
 import java.io.*;
 import java.util.ArrayList;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.EndianUtils;
 
 
 
@@ -75,7 +77,8 @@ public class Dicom_write {
 		//en endian, à ajouter 
 		int i;
 		for (i=0; i== (int)valeur.size();i++) { 
-			list_tempo.add((byte) valeur.get(i).intValue());
+			 //valeur.get(i).intValue();
+			 list_tempo.add((byte) EndianUtils.swapInteger(valeur.get(i).intValue()));
 		}
 	}
 	
@@ -95,7 +98,6 @@ public class Dicom_write {
 	}
 	
 	public void set_data_VR(char g1, char g2, char VR1, char VR2, char longueur) {
-		int i;
 		this.addTag(g1, g2);
 		this.addVR(VR1,VR2);
 		this.addValueLeng(longueur);
@@ -132,12 +134,16 @@ public class Dicom_write {
 		public ByteArrayOutputStream export() throws IOException {
 			byte[] result = new byte[list_tempo.size()];
 			for(int i = 0; i < list_tempo.size(); i++) {
-			    result[i] = list_tempo.get(i);// .byteValue(); ajoute ça si marche pas ? 
+			    result[i] = list_tempo.get(i);//.byteValue(); //ajoute ça si marche pas ? 
 			}
 			ByteArrayOutputStream Sortie = new ByteArrayOutputStream(result.length); 
-			Sortie.write(result);
+			//Sortie.write(result);
+			//Sortie.toByteArray();
+			FileUtils.writeByteArrayToFile(new File("D:\\Antonin\\ECAM\\2020-2021\\E-Health\\Eclipse_Dicom\\Github_DICOM\\Export_Testing\\fichier.dcm"), result);
 			return Sortie;
+			
 		}
+		
 		
 
 }

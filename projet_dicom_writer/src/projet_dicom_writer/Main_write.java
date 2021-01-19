@@ -1,10 +1,11 @@
 package projet_dicom_writer;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Main_write {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		//TODO Auto-generated method stub 
 		//double Data_accel[] ; fonction qui récupère le csv // = new Dicom_bluetooth();
 		
@@ -25,8 +26,12 @@ public class Main_write {
 		
 		// Ajouter les ajout de valeur, attention doivent être dans l'ordre, fonction qui doit les trier ! 
 		
+		
+		
 		// Remplissage des MetaInformations
 		// myFichier.addTag((byte) 0 ,(byte) 2,(byte) 0,(byte) 0 );
+		
+		
 		
 		
 		
@@ -54,6 +59,7 @@ public class Main_write {
 		myFichier.addValueLengStrict(96); // 6 channels, 4 samples = 24 data de 4 Bytes chacuns => 96 Bytes
 		myFichier.addValueIntlist(records);
 		
+		myFichier.export();
 	}
 
 }
